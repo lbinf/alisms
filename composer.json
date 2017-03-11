@@ -1,0 +1,28 @@
+{
+    "name": "lbinf/alisms",
+    "description": "This is ali SMS send interface",
+    "require-dev": {
+        "php": ">=5.6.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "lbinf",
+            "email": "290887098@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.6.4"
+    },
+    "autoload": {
+
+        "psr-4": {
+            "Alisms\\": "src/"
+        },
+        "files": [
+            "src/Core/Config.php"
+        ]
+
+    }
+}
