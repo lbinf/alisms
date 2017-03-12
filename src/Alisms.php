@@ -3,7 +3,7 @@
  * @Author: LBF
  * @Date:   2017-03-12 00:05:36
  * @Last Modified by:   LBF
- * @Last Modified time: 2017-03-12 19:47:59
+ * @Last Modified time: 2017-03-12 21:37:01
  *  define('ACCESS_ID','XXXXXXXXXX');
     define('ACCESS_SECRET','XXXXXXXXXX');
     $sms=new Alisms(ACCESS_ID,ACCESS_SECRET);
@@ -36,8 +36,16 @@ class Alisms{
 
     public function __construct($app_id='',$app_secrect=''){
 
-        self::$APP_ID=$app_id || config('alisms.app_id')?config('alisms.app_id'):die('APP_ID Not Empty');
-        self::$APP_SECRET=$app_secrect || config('alisms.app_secret')?config('alisms.app_id'):die('APP_SECRECT Not empty');
+        if($app_id) {
+            self::$APP_ID=$app_id;
+        }else{
+            self::$APP_ID=config('alisms.app_id')?:die('APP_ID Not Empty');
+        }
+        if($app_secrect){
+            self::$APP_SECRET=$app_secrect;
+        }else{
+            self::$APP_SECRET=config('alisms.app_secret')?:die('APP_SECRECT Not empty');
+        }
 
         $regionIds = [
             "cn-hangzhou",
@@ -122,8 +130,8 @@ class Alisms{
     }
     public function send(){
         $request=$this->request;
-        $signName=$this->signName || config('alisms.sign_ame');
-        $templateCode=$this->templateCode || config('alisms.template_code');
+        $signName=$this->signName ? : config('alisms.sign_name');
+        $templateCode=$this->templateCode ? : config('alisms.template_code');
         $request->setSignName($signName);/*签名名称*/
         $request->setTemplateCode($templateCode);/*模板code*/
         $request->setRecNum($this->recMobile);/*目标手机号*/
